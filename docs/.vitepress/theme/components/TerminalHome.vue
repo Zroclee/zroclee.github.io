@@ -72,15 +72,14 @@ const features = frontmatter.value.features || []
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - var(--vp-nav-height));
-  padding: 20px;
-  background-color: var(--vp-c-bg);
+  width: 100%;
+  padding: 10px;
   font-family: 'Courier New', Courier, monospace;
 }
 
 .terminal-window {
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   background-color: #1e1e1e;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);

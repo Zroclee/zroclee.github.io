@@ -10,6 +10,7 @@ export default {
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
+      'home-hero-image': () => h(TerminalHome)
     })
   },
   enhanceApp({ app, router, siteData }) {
