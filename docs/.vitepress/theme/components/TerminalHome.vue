@@ -25,22 +25,6 @@
           <span class="command">ls -la ./docs</span>
         </div>
         <div class="output file-list">
-          <div class="file-item">
-            <span class="permissions">drwxr-xr-x</span>
-            <span class="owner">zroc</span>
-            <span class="group">staff</span>
-            <span class="size">4096</span>
-            <span class="date">Feb 28</span>
-            <a href="/markdown-examples" class="file-link">Markdown Examples/</a>
-          </div>
-          <div class="file-item">
-            <span class="permissions">drwxr-xr-x</span>
-            <span class="owner">zroc</span>
-            <span class="group">staff</span>
-            <span class="size">4096</span>
-            <span class="date">Feb 28</span>
-            <a href="/api-examples" class="file-link">API Examples/</a>
-          </div>
           <div class="file-item" v-for="item in features" :key="item.title">
              <span class="permissions">-rw-r--r--</span>
              <span class="owner">zroc</span>

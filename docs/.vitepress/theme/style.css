@@ -105,25 +105,3 @@
 .VPHomeHero .image-bg {
   display: none !important;
 }
-
-/* Move Search to Right (before Appearance) */
-@media (min-width: 960px) {
-  .VPNavBarSearch {
-    order: 10;
-    margin-right: 16px;
-    margin-left: auto; /* Push search to the right */
-  }
-  
-  .VPNavBarAppearance {
-    order: 11 !important;
-  }
-  
-  .VPNavBarSocialLinks {
-    order: 12 !important;
-  }
-  
-  /* Ensure menu is on the left */
-  .VPNavBarMenu {
-    order: 1;
-  }
-}
