@@ -1,3 +1,7 @@
+<script setup>
+// No script needed for this component currently
+</script>
+
 <template>
   <div class="terminal-container">
     <div class="terminal-window">
@@ -7,49 +11,56 @@
           <span class="btn yellow"></span>
           <span class="btn green"></span>
         </div>
-        <div class="title">zroc@blog: ~</div>
+        <div class="title">zroc@agent: ~/workspace</div>
       </div>
       <div class="terminal-body">
-        <div class="command-line">
-          <span class="prompt">zroc@blog:~$</span>
-          <span class="command typing-effect">whoami</span>
-        </div>
-        <div class="output">
-          <p>Name: Zroc</p>
-          <p>Role: Developer / Learner</p>
-          <p>Mission: Sharing daily life in learning and development</p>
-        </div>
-
-        <div class="command-line">
-          <span class="prompt">zroc@blog:~$</span>
-          <span class="command">ls -la ./docs</span>
-        </div>
-        <div class="output file-list">
-          <div class="file-item" v-for="item in features" :key="item.title">
-             <span class="permissions">-rw-r--r--</span>
-             <span class="owner">zroc</span>
-             <span class="group">staff</span>
-             <span class="size">1024</span>
-             <span class="date">Feb 28</span>
-             <span class="file-link">{{ item.title }}</span>
+        <div class="content-wrapper">
+          <!-- Step 1: Initial Command -->
+          <div class="command-line">
+            <span class="prompt">zroc@agent:~$</span>
+            <span class="command">create-agent --name "Assistant" --role "Full Stack"</span>
           </div>
-        </div>
-        
-        <div class="command-line">
-          <span class="prompt">zroc@blog:~$</span>
-          <span class="cursor">_</span>
+
+          <!-- Step 2: Processing Output -->
+          <div class="output">
+            <div class="log-line">
+              <span class="info">[INFO]</span> Initializing agent workspace...
+            </div>
+            <div class="log-line">
+              <span class="info">[INFO]</span> Loading context from <span class="highlight">/docs/frontend</span>
+            </div>
+            <div class="log-line">
+              <span class="info">[INFO]</span> Loading context from <span class="highlight">/docs/backend</span>
+            </div>
+            <div class="log-line">
+              <span class="success">[SUCCESS]</span> Knowledge base indexing complete.
+            </div>
+            <div class="log-line">
+              <span class="info">[INFO]</span> Generating skills...
+            </div>
+          </div>
+
+          <!-- Step 3: Code Snippet Simulation -->
+          <div class="code-block">
+            <div class="line"><span class="keyword">const</span> <span class="variable">agent</span> = <span class="keyword">new</span> <span class="class-name">Agent</span>({</div>
+            <div class="line indent">  <span class="property">name</span>: <span class="string">'ZROC'</span>,</div>
+            <div class="line indent">  <span class="property">capabilities</span>: [</div>
+            <div class="line double-indent">    <span class="string">'Vue3'</span>, <span class="string">'NestJS'</span>, <span class="string">'Python'</span>, <span class="string">'LLM'</span></div>
+            <div class="line indent">  ],</div>
+            <div class="line indent">  <span class="property">status</span>: <span class="string">'Ready to code'</span></div>
+            <div class="line">});</div>
+          </div>
+
+          <!-- Step 4: Final Prompt -->
+          <div class="command-line active">
+            <span class="prompt">zroc@agent:~$</span>
+            <span class="cursor">_</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script setup>
-import { useData } from 'vitepress'
-
-const { frontmatter } = useData()
-const features = frontmatter.value.features || []
-</script>
 
 <style scoped>
 .terminal-container {
@@ -57,31 +68,40 @@ const features = frontmatter.value.features || []
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 10px;
-  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  perspective: 1000px;
 }
 
 .terminal-window {
   width: 100%;
-  max-width: 600px;
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: 580px;
+  background-color: #0d1117;
+  border-radius: 12px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.5), 
+    0 0 0 1px rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  border: 1px solid #333;
+  transition: transform 0.3s ease;
+}
+
+.terminal-container:hover .terminal-window {
+  transform: translateY(-5px) rotateX(2deg);
 }
 
 .terminal-header {
-  background-color: #2d2d2d;
-  padding: 10px 15px;
+  background-color: #161b22;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
 }
 
 .buttons {
   display: flex;
   gap: 8px;
+  z-index: 2;
 }
 
 .btn {
@@ -96,29 +116,31 @@ const features = frontmatter.value.features || []
 
 .title {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #999;
-  font-size: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #8b949e;
+  font-size: 13px;
+  font-weight: 500;
+  pointer-events: none;
 }
 
 .terminal-body {
   padding: 20px;
-  color: #f0f0f0;
-  font-size: 16px;
-  line-height: 1.5;
+  color: #c9d1d9;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 300px;
 }
 
 .command-line {
-  margin-bottom: 10px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .prompt {
-  color: #4caf50;
-  margin-right: 10px;
+  color: #7ee787;
   font-weight: bold;
 }
 
@@ -126,57 +148,49 @@ const features = frontmatter.value.features || []
   color: #fff;
 }
 
+.info { color: #58a6ff; }
+.success { color: #7ee787; }
+.highlight { color: #d2a8ff; }
+
 .output {
-  margin-bottom: 20px;
-  color: #ccc;
-  padding-left: 0;
+  margin-bottom: 16px;
+  color: #8b949e;
 }
 
-.file-list {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.code-block {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 3px solid #7ee787;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
 }
 
-.file-item {
-  display: grid;
-  grid-template-columns: 100px 60px 60px 60px 80px auto;
-  gap: 10px;
-  font-size: 14px;
-}
+.keyword { color: #ff7b72; }
+.variable { color: #79c0ff; }
+.class-name { color: #d2a8ff; }
+.property { color: #79c0ff; }
+.string { color: #a5d6ff; }
 
-.file-link {
-  color: #4ea8de;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.file-link:hover {
-  text-decoration: underline;
-  color: #64b5f6;
-}
+.indent { padding-left: 20px; }
+.double-indent { padding-left: 40px; }
 
 .cursor {
   display: inline-block;
-  width: 10px;
-  height: 20px;
-  background-color: #ccc;
-  animation: blink 1s infinite;
+  width: 8px;
+  height: 18px;
+  background-color: #c9d1d9;
+  animation: blink 1s step-end infinite;
   vertical-align: middle;
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-@media (max-width: 600px) {
-  .file-item {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .permissions, .owner, .group, .size, .date {
-    display: none;
+@media (max-width: 640px) {
+  .terminal-window {
+    font-size: 12px;
   }
 }
 </style>

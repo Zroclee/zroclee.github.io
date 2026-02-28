@@ -37,8 +37,7 @@ export default defineConfig({
           { text: 'LangChain', link: '/ai/langchain/' },
           { text: 'Principles', link: '/ai/principles/' }
         ]
-      },
-      { text: 'Examples', link: '/markdown-examples' }
+      }
     ],
 
     sidebar: {

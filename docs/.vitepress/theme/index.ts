@@ -4,6 +4,8 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import TerminalHome from './components/TerminalHome.vue'
+import HomeFeatures from './components/HomeFeatures.vue'
+import TechStack from './components/TechStack.vue'
 
 export default {
   extends: DefaultTheme,
@@ -15,5 +17,7 @@ export default {
   },
   enhanceApp({ app, router, siteData }) {
     app.component('TerminalHome', TerminalHome)
+    app.component('HomeFeatures', HomeFeatures)
+    app.component('TechStack', TechStack)
   }
 } satisfies Theme
