@@ -1,25 +1,13 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
-layout: home
-
-hero:
-  name: "Zroc's Blog"
-  text: "Sharing daily life in learning and development"
-  tagline: My great project tagline
-  actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
-
+layout: false
+title: Zroc's Terminal
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Tech Stack
+    details: Vue, React, Node.js, Python
+  - title: Projects
+    details: My open source contributions
+  - title: Contact
+    details: Email, GitHub, Twitter
 ---
 
+<TerminalHome />
