@@ -34,8 +34,9 @@ export default defineConfig({
         items: [
           { text: 'Prompts', link: '/ai/prompts/' },
           { text: 'Context', link: '/ai/context/' },
+          { text: 'Principles', link: '/ai/principles/' },
           { text: 'LangChain', link: '/ai/langchain/' },
-          { text: 'Principles', link: '/ai/principles/' }
+          { text: 'Architecture', link: '/ai/architecture/' }
         ]
       }
     ],
