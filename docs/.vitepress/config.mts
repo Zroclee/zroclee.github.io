@@ -77,12 +77,11 @@ export default defineConfig({
           ]
         }
       ],
-      '/': [
+      '/interview/': [
         {
-          text: 'Examples',
+          text: 'Interview',
           items: [
-            { text: 'Markdown Examples', link: '/markdown-examples' },
-            { text: 'Runtime API Examples', link: '/api-examples' }
+            { text: 'Overview', link: '/interview/index' } 
           ]
         }
       ]

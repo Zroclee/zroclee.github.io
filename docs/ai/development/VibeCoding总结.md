@@ -1,6 +1,6 @@
 # VibeCoding总结
 
-尝试Vibe Coding一个月，使用的IDE是国际版Trae Pro。同时推进三个项目，有python、nodejs、vue、react，高强度工作一周的成果是：消耗了40多刀的token，共计产出22452行代码。不得不说时代是真的变了。
+尝试Vibe Coding一个月，使用的IDE是国际版Trae Pro。同时推进三个项目，有python、nodejs、vue、react。一个月消耗了40多刀的token，共计产出22452行代码。不得不说时代是真的变了。产出了开源项目zrocclaw，一个仿🦞的只能操作浏览器的小玩具
 
 ## Vibe Coding技巧
 
