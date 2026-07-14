@@ -12,3 +12,8 @@ Documentation for Frontend - Basics.
 ## 画中画
 
 [画中画](画中画.md)
+
+
+## 设计模式
+
+[设计模式](设计模式/index.md)

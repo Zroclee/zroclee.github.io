@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设计模式示例</title>
+</head>
+<body>
+    <div>
+        <h1>观察者模式</h1>
+        <p>当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。</p>
+        <input type="text" id="state-input" value="0" oninput="observerUpdateState()">
+        <p id="observer-state1">观察者1状态：0</p>
+        <p id="observer-state2">观察者2状态：0</p>
+    </div>
+    <div>
+        <h1>发布-订阅模式</h1>
+        <p>当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。</p>
+        <input type="text" id="state-input" value="0" oninput="publisherUpdateState()">
+        <p id="publisher-state1">订阅者1状态：0</p>
+        <p id="publisher-state2">订阅者2状态：0</p>
+    </div>
+    <script src="./index.js"></script>
+    
+</body>
+</html>
