@@ -59,6 +59,7 @@ export default defineConfig({
           text: 'Backend',
           items: [
             { text: 'Overview', link: '/backend/' },
+            { text: 'Java', link: '/backend/java/' },
             { text: 'Python', link: '/backend/python/' },
             { text: 'Node.js', link: '/backend/nodejs/' },
             { text: 'NestJS', link: '/backend/nestjs/' }
