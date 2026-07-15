@@ -481,3 +481,328 @@ public class Main {
 ### if条件判断
 
 在Java程序中，如果要根据条件来决定是否执行某一段代码，就需要if语句。
+根据if的计算结果（true还是false），JVM决定是否执行if语句块（即花括号{}包含的所有语句）。
+
+```java
+// 条件判断
+public class Main {
+    public static void main(String[] args) {
+        int n = 70;
+        if (n>=90) {
+            System.out.println("优秀");
+            System.out.println("恭喜你");
+        } else if (n >= 60) {
+            System.out.println("及格了");
+        } else {
+            System.out.println("不及格了");
+        }
+        // 当if语句块只有一行语句时，可以省略花括号{}：
+        // 但是，省略花括号并不总是一个好主意 假设某个时候，突然想给if语句块增加一条语句时
+        // 由于使用缩进格式，很容易把两行语句都看成if语句的执行块，但实际上只有第一行语句是if的执行块。
+        // !!! 不推荐
+        // if (n < 60) System.out.println("不及格了");
+
+        System.out.println("END");
+    }
+}
+
+```
+
+##### 判断引用类型相等
+
+判断值类型的变量是否相等，可以使用==运算符。但是，判断引用类型的变量是否相等，需要使用equals()方法。
+
+```java
+// 条件判断
+public class Main {
+    public static void main(String[] args) {
+        String s1 = "hello";
+        String s2 = "HELLO".toLowerCase();
+        System.out.println(s1);
+        System.out.println(s2);
+        if (s1.equals(s2)) {
+            System.out.println("s1 equals s2");
+        } else {
+            System.out.println("s1 not equals s2");
+        }
+
+        // 同时为了避免变量为null时的运行异常，利可以用短路运算符&&
+        if (s1 != null && s2 != null && s1.equals(s2)) {
+            System.out.println("s1 equals s2");
+        } else {
+            System.out.println("s1 not equals s2");
+        }
+    }
+}
+
+```
+
+- if ... else可以做条件判断，else是可选的；
+
+- 不推荐省略花括号{}；
+
+- 多个if ... else串联要特别注意判断顺序；
+
+- 要注意if的边界条件；
+
+- 要注意浮点数判断相等不能直接用==运算符；
+
+- 引用类型判断内容相等要使用equals()，注意避免NullPointerException。
+
+### switch多重选择
+
+switch语句根据switch (表达式)计算的结果，跳转到匹配的case结果，然后继续执行后续语句，直到遇到break结束执行。
+
+```java
+// switch
+public class Main {
+    public static void main(String[] args) {
+        int option = 1;
+        switch (option) {
+        case 1:
+            System.out.println("Selected 1");
+            break;
+        case 2:
+            System.out.println("Selected 2");
+            break;
+        case 3:
+            System.out.println("Selected 3");
+            break;
+        }
+        // 如果有几个case语句执行的是同一组语句块
+        case 4:
+        case 5:
+            System.out.println("Selected 4, 5");
+            break;
+        default:
+            System.out.println("Invalid option");
+            break;
+    }
+}
+```
+
+使用switch时，注意case语句并没有花括号{}，而且，case语句具有***“穿透性”***，漏写break将导致意想不到的结果：判断命中后，后续的case语句内的代码也会执行。
+
+#### switch 表达式
+
+使用switch时，如果遗漏了break，就会造成严重的逻辑错误，而且不易在源代码中发现错误。从***Java 14***开始，switch语句升级为更简洁的表达式语法，使用类似模式匹配（Pattern Matching）的方法，保证只有一种路径会被执行，并且不需要break语句：
+
+```java
+
+// switch
+public class Main {
+    public static void main(String[] args) {
+        String fruit = "apple";
+        switch (fruit) {
+        case "apple" -> System.out.println("Selected apple");
+        case "pear" -> System.out.println("Selected pear");
+        case "mango" -> {
+            System.out.println("Selected mango");
+            System.out.println("Good choice!");
+        }
+        default -> System.out.println("No fruit selected");
+        }
+
+        // 使用新的switch语法，不但不需要break，还可以直接返回值。
+        // 同时如果需要复杂的语句，同时又要返回值，用yield返回一个值作为switch语句的返回值
+        int option = 2;
+        int result = switch (option) {
+            case 1 -> 100;
+            case 2 -> 200;
+            case 3 -> 300;
+            case 4 -> {
+                System.out.println("Selected 4");
+                yield 400;
+            }
+            default -> 0;
+        };
+        System.out.println(result);
+    }
+}
+```
+
+- switch语句可以做多重选择，然后执行匹配的case语句后续代码；
+
+- switch的计算结果必须是整型、字符串或枚举类型；
+
+- 注意：千万不要漏写break，建议打开fall-through警告；
+
+- 总是写上default，建议打开missing default警告；
+
+- 从Java 14开始，switch语句正式升级为表达式，不再需要break，并且允许使用yield返回值。
+
+---
+
+### 循环语句
+
+#### while循环
+
+Java提供的while条件循环
+
+while循环在每次循环开始前，首先判断条件是否成立。如果计算结果为true，就把循环体内的语句执行一遍，如果计算结果为false，那就直接跳到while循环的结束。
+
+注意到while循环是先判断循环条件，再循环，因此，有可能一次循环都不做。
+
+```java
+// while
+public class Main {
+    public static void main(String[] args) {
+        int sum = 0;
+		int m = 20;
+		int n = 100;
+		// 使用while计算M+...+N:
+		while (m<=n) {
+			sum += m;
+			m++;
+		}
+		System.out.println(sum);
+    }
+}
+
+```
+
+编写循环时要注意循环条件，并避免死循环。
+
+#### do while循环
+
+在Java中，while循环是先判断循环条件，再执行循环。而另一种do while循环则是先执行循环，再判断条件，条件满足时继续循环，条件不满足时退出。
+
+可见，do while循环会至少循环一次
+
+```java
+// do-while
+public class Main {
+    public static void main(String[] args) {
+        int sum = 0;
+        int n = 1;
+        do {
+            sum = sum + n;
+            n ++;
+        } while (n <= 100);
+        System.out.println(sum);
+    }
+}
+```
+
+#### for循环
+
+Java使用最广泛的还是for循环。
+for循环的功能非常强大，它使用计数器实现循环。for循环会先初始化计数器，然后，在每次循环前检测循环条件，在每次循环后更新计数器。计数器变量通常命名为i。
+
+```java
+// for
+public class Main {
+    public static void main(String[] args) {
+        int sum = 0;
+        for (int i=1; i<=100; i++) {
+            sum = sum + i;
+        }
+        System.out.println(sum);
+
+        // for循环还可以缺少初始化语句、循环条件和每次循环更新语句，例如：
+        // 不设置结束条件:
+        for (int i=0; ; i++) {
+            ...
+        }
+        // 不设置结束条件和更新语句:
+        for (int i=0; ;) {
+            ...
+        }
+        // 什么都不设置:
+        for (;;) {
+            ...
+        }
+
+        // 求PI的近似值:
+        double pi = 0;
+        for (int i = 0; i < 100_0000_00; i++) {
+            pi = i == 0 ? 1 : i%2 == 1 ? pi - 1.0 / (i*2+1) : pi + 1.0 / (i*2+1);
+        }
+        System.out.println(pi * 4);
+    }
+}
+
+```
+
+for each循环
+for循环经常用来遍历数组，因为通过计数器可以根据索引来访问数组的每个元素：
+但是，很多时候，我们实际上真正想要访问的是数组每个元素的值。Java还提供了另一种for each循环，它可以更简单地遍历数组：
+
+```java
+// for-each
+public class Main {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        for (int number : numbers) {
+            System.out.println(number);
+        }
+    }
+}
+```
+
+for循环通过计数器可以实现复杂循环；
+
+for each循环可以直接遍历数组的每个元素；
+
+最佳实践：计数器变量定义在for循环内部，循环体内部不修改计数器；
+
+---
+
+### break 和 continue
+无论是while循环还是for循环，有两个特别的语句可以使用，就是break语句和continue语句。
+#### break
+在循环过程中，可以使用break语句跳出当前循环。
+```java
+// break
+public class Main {
+    public static void main(String[] args) {
+        int sum = 0;
+        for (int i=1; ; i++) {
+            sum = sum + i;
+            if (i == 100) {
+                break;
+            }
+        }
+        System.out.println(sum);
+    }
+}
+```
+#### continue
+在循环过程中，可以使用continue语句跳过当前循环，继续下一次循环。
+```java
+// continue
+public class Main {
+    public static void main(String[] args) {
+        int sum = 0;
+        for (int i=1; i<=10; i++) {
+            System.out.println("begin i = " + i);
+            if (i % 2 == 0) {
+                continue; // continue语句会结束本次循环
+            }
+            sum = sum + i;
+            System.out.println("end i = " + i);
+        }
+        System.out.println(sum); // 25
+    }
+}
+
+```
+
+break语句可以跳出当前循环；
+
+break语句通常配合if，在满足条件时提前结束整个循环；
+
+break语句总是跳出最近的一层循环；
+
+continue语句可以提前结束本次循环；
+
+continue语句通常配合if，在满足条件时提前结束本次循环。
+
+## 数组操作
+常用的数组操作有：
+遍历；
+排序。
+以及多维数组的概念。
+
+### 遍历数组
+
