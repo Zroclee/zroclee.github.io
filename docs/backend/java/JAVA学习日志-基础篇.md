@@ -749,9 +749,13 @@ for each循环可以直接遍历数组的每个元素；
 ---
 
 ### break 和 continue
+
 无论是while循环还是for循环，有两个特别的语句可以使用，就是break语句和continue语句。
+
 #### break
+
 在循环过程中，可以使用break语句跳出当前循环。
+
 ```java
 // break
 public class Main {
@@ -767,8 +771,11 @@ public class Main {
     }
 }
 ```
+
 #### continue
+
 在循环过程中，可以使用continue语句跳过当前循环，继续下一次循环。
+
 ```java
 // continue
 public class Main {
@@ -799,6 +806,7 @@ continue语句可以提前结束本次循环；
 continue语句通常配合if，在满足条件时提前结束本次循环。
 
 ## 数组操作
+
 常用的数组操作有：
 遍历；
 排序。
@@ -806,3 +814,157 @@ continue语句通常配合if，在满足条件时提前结束本次循环。
 
 ### 遍历数组
 
+数组最常见的一个操作就是遍历。
+通过for循环就可以遍历数组。因为数组的每个元素都可以通过索引来访问，因此，使用标准的for循环可以完成一个数组的遍历。二种方式是使用for each循环，直接迭代数组的每个元素
+
+```java
+// 遍历数组
+public class Main {
+    public static void main(String[] args) {
+        int[] ns = { 1, 4, 9, 16, 25 };
+        for (int i=0; i<ns.length; i++) {
+            int n = ns[i];
+            System.out.println(n);
+        }
+        for (int n : ns) {
+            System.out.println(n);
+        }
+        // 打印数组内容
+        System.out.println(Arrays.toString(ns));
+    }
+}
+
+```
+
+遍历数组可以使用for循环，for循环可以访问数组索引，for each循环直接迭代每个数组元素，但无法获取索引；
+
+使用Arrays.toString()可以快速获取数组内容。
+
+### 数组排序
+
+对数组进行排序是程序中非常基本的需求。常用的排序算法有冒泡排序、插入排序和快速排序等。
+
+我们来看一下如何使用冒泡排序算法对一个整型数组从小到大进行排序：
+
+同时调用JDK提供的Arrays.sort()
+
+```java
+// 冒泡排序
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] ns = { 28, 12, 89, 73, 65, 18, 96, 50, 8, 36 };
+        // 排序前:
+        System.out.println(Arrays.toString(ns));
+        for (int i = 0; i < ns.length - 1; i++) {
+            for (int j = 0; j < ns.length - i - 1; j++) {
+                if (ns[j] > ns[j+1]) {
+                    // 交换ns[j]和ns[j+1]:
+                    int tmp = ns[j];
+                    ns[j] = ns[j+1];
+                    ns[j+1] = tmp;
+                }
+            }
+        }
+        // 排序后:
+        System.out.println(Arrays.toString(ns));
+
+        int[] ns2 = { 28, 12, 89, 73, 65, 18, 96, 50, 8, 36 };
+        Arrays.sort(ns2);
+        System.out.println(Arrays.toString(ns2));
+    }
+}
+
+```
+
+常用的排序算法有冒泡排序、插入排序和快速排序等；
+
+冒泡排序使用两层for循环实现排序；
+
+交换两个变量的值需要借助一个临时变量；
+
+可以直接使用Java标准库提供的Arrays.sort()进行排序；
+
+对数组排序会直接修改数组本身。
+
+### 多维数组
+
+二维数组
+二维数组就是数组的数组。定义一个二维数组如下：
+三维数组
+三维数组就是二维数组的数组。可以这么定义一个三维数组：
+
+```java
+// 二维数组
+public class Main {
+    public static void main(String[] args) {
+        int[][] ns = {
+            { 1, 2, 3, 4 },
+            { 5, 6, 7, 8 },
+            { 9, 10, 11, 12 }
+        };
+        System.out.println(ns.length); // 3
+        int[][][] ns = {
+            {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+            },
+            {
+                {10, 11},
+                {12, 13}
+            },
+            {
+                {14, 15, 16},
+                {17, 18}
+            }
+        };
+        System.out.println(ns.length); // 3
+        System.out.println(Arrays.deepToString(ns));
+    }
+}
+
+```
+
+二维数组就是数组的数组，三维数组就是二维数组的数组；
+
+多维数组的每个数组元素长度都不要求相同；
+
+打印多维数组可以使用Arrays.deepToString()；
+
+最常见的多维数组是二维数组，访问二维数组的一个元素使用array[row][col]。
+
+
+### 命令行参数
+
+Java程序的入口是main方法，而main方法可以接受一个命令行参数，它是一个String[]数组。
+
+这个命令行参数由JVM接收用户输入并传给main方法：
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        for (String arg : args) {
+            System.out.println(arg);
+            if ("-version".equals(arg)) {
+                System.out.println("v 1.0");
+                break;
+            }
+        }
+    }
+}
+
+```
+
+```
+$ javac Main.java
+$ java Main -version
+v 1.0
+```
+
+命令行参数类型是String[]数组；
+
+命令行参数由JVM接收用户输入并传给main方法；
+
+如何解析命令行参数需要由程序自己实现。
